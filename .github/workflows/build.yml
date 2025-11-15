@@ -39,7 +39,7 @@ jobs:
 
       - name: Run pyright
         run: pyright
-        
+
   build_and_push:
     runs-on: ubuntu-latest
     steps:
