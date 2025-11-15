@@ -30,17 +30,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Debug vars (MUST SHOW USERNAME)
+      - name: Debug username
         run: |
-          echo "Raw: '${{ vars.DOCKER_USERNAME }}'"
-          echo "Repo: ${{ github.event.repository.name }}"
-          echo "Tag: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest"
+          echo "Using username: ${{ secrets.DOCKER_USERNAME }}"
+          echo "Full tag: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest"
         shell: bash
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ vars.DOCKER_USERNAME }}
+          username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Set up Docker Buildx
@@ -51,4 +50,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
