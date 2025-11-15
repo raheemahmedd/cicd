@@ -6,7 +6,7 @@ from sqlmodel import Field, Session, SQLModel, create_engine, select
 
 from config import settings
 
-
+### just tri something
 class Hero(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     name: str = Field(index=True)
